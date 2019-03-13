@@ -1,18 +1,19 @@
 var counter = 0;
 AFRAME.registerComponent('init-scene', {
   init: function () {
-    if (!window.location.href.match("ar.html")) {
+    if (!document.referrer.match("load.html")) {
+      window.location.href = `${window.location.protocol}//${window.location.host}/load.html`;
+      return;
+    }
+    if (window.location.href.match("load.html")) {
       setTimeout(() => {
-        window.location.href += 'ar.html';
+        window.location.href = `${window.location.protocol}//${window.location.host}`;
       }, 1000);
+      return;
     }
 
     console.log('init-scene: ' + counter);
     counter++;
-    // initEggplants();
-    // initHawks();
-    // initFuji();
-    // initDancer();
 
     // initPaper();
   }
